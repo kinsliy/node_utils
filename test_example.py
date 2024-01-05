@@ -1,5 +1,7 @@
 from playwright.sync_api import sync_playwright
 import json
+import time
+from create_admission_person import all_fun
 
 def run(playwright):
     browser = playwright.chromium.launch(headless=False)
@@ -14,7 +16,7 @@ def run(playwright):
         print("Cookies file not found. Will proceed with new login.")
 
     page = context.new_page()
-    page.goto('https://apaas-dev1205.aedev.feishuapp.cn/ae/ui/apps/1746381508062253/appPages/wl94sgglide2cx?dataGrid%40k50r6mrrlhoeq=%7B%22snapshotId%22%3A1785230278686746%7D')
+    page.goto('https://apaas-dev1205.aedev.feishuapp.cn/ae/ui/apps/1746381508062253/appPages/wl94sgglide2cx')
    
 
     # 检查是否已经登录
@@ -38,57 +40,100 @@ def run(playwright):
     page.click(button_selector)
     print('点击新建按钮')
 
-    # 等待表单出现
-    form_selector = 'span.sc-fznXWL.dIkGXA.kunlun-clamp:text("新建待入场")'  # 替换为定位表单的选择器
-    page.wait_for_selector(form_selector)
-    print('打开新建待入场人员表单')
-
-
-    # XPath 选择器
-    xpath_selector = "xpath=//span[contains(text(), '法定姓名')]/ancestor::div[contains(@class, 'form-item-label')]/following-sibling::div[contains(@class, 'form-item-control')]/div[contains(@class, 'form-item-control')]"
-  
+    all_fun(page)
     
-    xpath_element = page.query_selector(xpath_selector)
 
-    # 定位最近的具有contenteditable属性的父元素
-    editable_div_selector = xpath_element.query_selector("div[contenteditable='true'].editor-kit-container")
 
-    # 等待可编辑的div出现
-    page.wait_for_selector(editable_div_selector)
+#    # 点击下拉菜单以打开选项列表
+#     dropdown_selector = 'div.sc-pRrUz.dQnepB'
+#     page.click(dropdown_selector)
 
-    # 点击该div以便进行输入
-    page.click(editable_div_selector)
+#     # 等待下拉选项出现并选择它
+#     # 这里假设选项可以通过文本内容定位
+#     option_text = '男'
+#     page.click(f"text={option_text}")
+#     print('选择性别')
+#     # ... 针对其他输入框重复上述步骤 ...
+    
+    
+#     country_selector = '[id^="formItem-_initialRecord__proposed__f72d99b6\\%\\%package_bmf9g5__c__lookup_aade3st4fpgay050-metaFormContainer"] div.sc-oTZKJ.HHLbu.form-item-control'
+#     test_x = page.locator(country_selector)
+#     test_x.click()
+#     page.keyboard.type('中国')
+#     # 等待下拉选项出现并选择它
+#     # 这里假设选项可以通过文本内容定位
+#     time.sleep(1)
+#     country_selector_text = '中国大陆'
+#     page.click(f"text={country_selector_text}")
+#     print('国家/地区')
 
-    # 输入文本，这里假设您要输入的是"Hello"
-    page.keyboard.type('自动化输入的法定姓名')
-    print('输入法定姓名')
 
-   # 点击下拉菜单以打开选项列表
-    dropdown_selector = 'div.sc-pRrUz.dQnepB'
-    page.click(dropdown_selector)
+#     time.sleep(5)
+    
+    
+#     id_type = '[id^="formItem-_initialRecord__proposed__a0924e88\\%\\%package_bmf9g5__c__lookup_aaddiqarrfoco"] div.sc-oTZKJ.HHLbu.form-item-control'
+#     page.locator(id_type).click()
+#     page.keyboard.type('其他')
+#     # 等待下拉选项出现并选择它
+#     # 这里假设选项可以通过文本内容定位
+#     time.sleep(1)
+#     id_type_text = '其他护照'
+#     page.click(f"text={id_type_text}")
+    
+    
+    
+#     # id_number = '[id^="formItem-_initialRecord__proposed__a0924e88\\%\\%package_bmf9g5__c__text_aaddiqarrfodo"] div.sc-oTZKJ.HHLbu.form-item-control'
+#     # page.locator(id_number).click()
+#     # page.keyboard.type('34947374382')
+    
+#     # phone_number = '[id^="formItem-_initialRecord__proposed__a0924e88%%package_bmf9g5__c__phone_aaddiqbnrkyd4"] input'
+#     # page.locator(phone_number).click()
+#     # page.keyboard.type('15687462735')
+    
+    
+#     person_type = '[id^="formItem-_initialRecord__proposed__58b433c1\\%\\%package_bmf9g5__c__lookup_aaddiugagiidi"] div.sc-oTZKJ.HHLbu.form-item-control'
+#     page.locator(person_type).evaluate("""(element) => {
+#     element.scrollIntoView(); 
+#     }""")
+#     page.locator(person_type).click()
+#     page.keyboard.type('外包')
+#     # 等待下拉选项出现并选择它
+#     # 这里假设选项可以通过文本内容定位
+#     time.sleep(1)
+#     person_type_text = '外包'
+#     page.click(f"text={person_type_text}")
+    
+#     time.sleep(1)
+    
+    # person_sub_type = '[id^="formItem-_initialRecord__proposed__58b433c1\\%\\%package_bmf9g5__c__lookup_aaddiugawz2aw"] div.sc-oTZKJ.HHLbu.form-item-control'
+    # page.locator(person_sub_type).evaluate("""(element) => {
+    # element.scrollIntoView(); 
+    # }""")
+    # page.locator(person_sub_type).click()
+    # page.keyboard.type('人员外包')
+    # # 等待下拉选项出现并选择它
+    # # 这里假设选项可以通过文本内容定位
+    # time.sleep(1)
+    # person_sub_type_text = '人员外包'
+    # page.click(f"text={person_sub_type_text}")
+    
 
-    # 等待下拉选项出现并选择它
-    # 这里假设选项可以通过文本内容定位
-    option_text = '男'
-    page.click(f"text={option_text}")
-    print('选择性别')
-    # ... 针对其他输入框重复上述步骤 ...
-
+    # time.sleep(6)
     # 点击提交按钮
-    submit_button_selector = 'div.ant-row.ant-form-action-bar button.ant-btn.sc-pQGev.lbdMzz.ant-btn-primary'  # 替换为定位提交按钮的选择器
-    page.click(submit_button_selector)
-    print('点击保存按钮')
+    # submit_button_selector = 'div.ant-row.ant-form-action-bar button.ant-btn.sc-pQGev.lbdMzz.ant-btn-primary'  # 替换为定位提交按钮的选择器
+    # page.click(submit_button_selector)
+    # print('点击保存按钮')
     
     # ...[之前的脚本代码]...
 
     # 询问用户是否关闭浏览器
-    response = input("测试完成。输入'y'来关闭浏览器，或者按任意键保持浏览器打开: ")
+    # response = input("测试完成。输入'y'来关闭浏览器，或者按任意键保持浏览器打开: ")
 
-    if response.lower() == 'y':
-        browser.close()
-    else:
-        print("浏览器将保持打开状态。手动关闭浏览器以结束会话。")
-        # 在这种情况下，脚本将结束，但浏览器会保持打开状态
+    # if response.lower() == 'y':
+    #     browser.close()
+    # else:
+    #     print("浏览器将保持打开状态。手动关闭浏览器以结束会话。")
+    #     # 在这种情况下，脚本将结束，但浏览器会保持打开状态
 
    
 
