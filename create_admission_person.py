@@ -29,7 +29,7 @@ def text_type(page, id, value):
     id_selector = f'[id^="{id}"] div.sc-oTZKJ.HHLbu.form-item-control'
     page.locator(id_selector).click()
     page.keyboard.type(f"{value}")
-    time.sleep(1)
+    # time.sleep(1)
     
 def form_submit_type(page,):
     time.sleep(5)
@@ -47,7 +47,7 @@ def phone_type(page, id, value):
     id_selector = f'[id^="{id}"] input'
     page.locator(id_selector).click()
     page.keyboard.type(f"{value}")
-    time.sleep(1)
+    # time.sleep(1)
 
 def date_select_type(page, id, value):
     time.sleep(2)
@@ -73,7 +73,7 @@ def select_type(page, id, value):
     page.keyboard.type(f"{value}")
     time.sleep(1)
     page.locator(f"div.kunlun-ui-select-dropdown:not(.ant-select-dropdown-hidden) li.ant-select-dropdown-menu-item[name={value}]").click()
-    time.sleep(1)
+    # time.sleep(1)
 
 
 def search_select_type(page, id, value,search_value = False):
@@ -121,7 +121,7 @@ field_list = [
     {"name": f"{common_str}option_aaddip5eeqkio", "value": "男", "type_fun": "select_type"},       
     {"name": f"{search_select_str}lookup_aade3st4fpgay050", "value": "中国大陆", "type_fun": "search_select_type"},
     {"name": f"{common_str}lookup_aaddiqarrfoco", "value": "其他护照", "type_fun": "search_select_type"},
-    {"name": f"{common_str}text_aaddiqarrfodo", "value": "4343544429472942", "type_fun": "text_type"},
+    {"name": f"{common_str}text_aaddiqarrfodo", "value": "4343544428472942", "type_fun": "text_type"},
     {"name": f"{common_str}phone_aaddiqbnrkyd4", "value": "15689763465", "type_fun": "phone_type"},
     {"name": f"{person_type_str}lookup_aaddiugagiidi", "type_fun": "scroll_type"},
     {"name": f"{person_type_str}lookup_aaddiugagiidi", "value": "外包", "type_fun": "search_select_type"},
